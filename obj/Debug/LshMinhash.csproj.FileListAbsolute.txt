@@ -1,0 +1,27 @@
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\bin\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\bin\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\obj\Debug\LshMinhash.csprojResolveAssemblyReference.cache
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\C# LSH Blog Examples\LSH Blog Examples\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LSH Blog Examples\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LSH Blog Examples\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LSH Blog Examples\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.pdb
+C:\Users\Serkan\Dropbox\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\Serkan\Dropbox\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.exe
+C:\Users\Serkan\Dropbox\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\Newtonsoft.Json.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\Newtonsoft.Json.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\dotNetRDF.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\VDS.Common.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\dotNetRDF.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\VDS.Common.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LshMinhash.csprojResolveAssemblyReference.cache

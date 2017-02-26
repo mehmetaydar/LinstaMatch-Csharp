@@ -1,0 +1,20 @@
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\dotNetRDF.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\Newtonsoft.Json.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\VDS.Common.dll
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\dotNetRDF.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\HtmlAgilityPack.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\Newtonsoft.Json.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\bin\Debug\VDS.Common.xml
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch\obj\Debug\LSH Blog Examples.pdb
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch-Csharp\bin\Debug\LSH Blog Examples.exe.config
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch-Csharp\obj\Debug\LSH Blog Examples.exe
+C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LinstaMatch-Csharp\obj\Debug\LSH Blog Examples.pdb
