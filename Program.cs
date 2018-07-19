@@ -10,12 +10,27 @@ namespace LinstaMatch
 {
     class Program
     {
+        /*whether we are using our tuned LSH-Minhash for candidata pair generation (LinstaMatch) or the regular LSH-Minhash implementation*/
+        private static bool tuned = true;
+        public static bool Tuned
+        {
+            get { return Program.tuned; }
+        }
+        //used when Tuned = false
+        private static int constantRvalue = 3;
+        public static int ConstantRvalue
+        {
+            get { return Program.constantRvalue; }
+        }
+
         private static string dataset_main_location = @"..\..\input\";
         static void Main(string[] args)
         {
+            Console.WriteLine("Tuned: " + Program.Tuned + "\n");
             /*Evaluations mentined in LinstaMatch Paper - start*/
 
-            processNewsCorporaFiles(true, 5000);  //Process a sample of 5000 instances from news-aggregator dataset for candidate-pairs-generation
+            //processNewsCorporaFiles(true,250000);
+            //processNewsCorporaFiles(true, 5000);  //Process a sample of 5000 instances from news-aggregator dataset for candidate-pairs-generation
             //processNewsCorporaFiles(false, 5000); //Process All news-aggregator dataset for candidate-pairs-generation
 
             //processAmazonJsonDumpFiles(true, 5000); //Process a sample of 5000 instances from Amazon office products metadata dataset for candidate-pairs-generation
@@ -26,6 +41,7 @@ namespace LinstaMatch
 
 
             //processUobmLargeFiles_InstanceMatch(false, 1000); //Process UOBM-Mainbox files used in OAEI 2016 campaign for instance matching
+            
             //processSpimbenchFiles_InstanceMatch(false, 1000); //Process Spimbench files used in OAEI 2016 campaign for instance matching
 
             /*Evaluations mentined in LinstaMatch Paper - end*/
@@ -40,6 +56,8 @@ namespace LinstaMatch
             //processNumbersTest(false, 1000);
             //generatePairsFileForRoleSim();
              * */
+            //For integration to RoleSim
+            generatePairsFileForRoleSim();
         }
         static void processNewsCorporaFiles(bool sample = false, int sample_size = 1000)
         {
@@ -132,7 +150,7 @@ namespace LinstaMatch
             Console.WriteLine("Calculated precision from found pairs in Time : " + sw.Elapsed.ToString("mm\\:ss\\.ff"));
             sw.Stop();
 
-            if (sample)
+            if (sample && sample_size<=10000)
             {
                 sw.Restart();
                 Console.WriteLine("Calculating recall from actual should be pairs:");
@@ -851,12 +869,16 @@ namespace LinstaMatch
         static void generatePairsFileForRoleSim()
         {
             //to generate pair file for role-sim jaccard
+            //string rdf_flat_file = @"../../input\infobox_properties_100000_flat.txt";
+            //string rdf_flat_file = @"C:\Users\maydar\Documents\Visual Studio 2013\Projects\clean-v1-opt1\data-sets\university\sparql_university_4.txt_flat.txt";
+            //string rdf_flat_file = @"C:\Users\maydar\Documents\Visual Studio 2013\Projects\clean-v1-opt1\data-sets\Lubm\university_all.txt_flat.txt";
+
             string rdf_flat_file =
-                 @"C:\Users\maydar\Dropbox\Semantic Study\ScabilityPaper\c#-code\LshMinhash\LshMinhash\input\infobox_properties_10000_flat.txt";
+                @"C:\Users\maydar\Documents\Sony Backup\PHD\SEMANTIC STUDY\dbpedia\infobox\infobox_properties_10000000_flat.txt";
             string pair_output_filename = rdf_flat_file + "_minhashpairs.txt";
-            int numHashFunctions = 500;
-            double simThreshold = 0.5;
-            bool exclude_sim_under_threshold = true; //vertex pairs which have estimated similarity under the threshold will be excluded if set
+            int numHashFunctions = 250;
+            double simThreshold = 0.33;
+            bool exclude_sim_under_threshold = false; //vertex pairs which have estimated similarity under the threshold will be excluded if set
             //MinHasher minHasher = new MinHasher(numHashFunctions, simThreshold);
             MinHasher2 minHasher = new MinHasher2(numHashFunctions, simThreshold);
 
@@ -875,80 +897,21 @@ namespace LinstaMatch
             double entireCount = testDoc.Length;*/
 
             FlatInputReader flatInputReader = new FlatInputReader(rdf_flat_file);
-            int testDocKey = 771;
-            Console.WriteLine("\r\nTest doc key: " + testDocKey);
-            int[] testDoc = flatInputReader.vertexLabelList[testDocKey];
-            double entireCount = testDoc.Length;
-
-            //Compare the test document to all items in our document collection using Jaccard 
-            //similarity and no minhashing 
-            Console.WriteLine("Jaccard Similarity for each entire collection:");
-            sw.Restart();
-            int maxSimDocKey_fromJaccard = -1;
-            double maxSim_fromJaccard = -1;
-            int index = 1;
-            foreach (var document in flatInputReader.vertexLabelList)
-            {   //these value have not been minhashed yet, but the jaccard calulation is the same...
-                double jaccard = NumberDocumentCreator.calculateJaccard(testDoc, document.Value);
-                entireCount += document.Value.Length;
-                //Console.WriteLine("Document " + document.Key.ToString() + ": " + jaccard.ToString() + "     Time :" + sw.Elapsed.ToString("mm\\:ss\\.ff"));     //.ToString("P"));
-                if (jaccard > maxSim_fromJaccard && document.Key != testDocKey)
-                {
-                    maxSim_fromJaccard = jaccard;
-                    maxSimDocKey_fromJaccard = document.Key;
-                }
-                index++;
-            }
-            sw.Stop();
-            Console.WriteLine("Regular jaccard Time :" + sw.Elapsed.ToString("mm\\:ss\\.ff"));     //.ToString("P"));
+            
             Console.WriteLine(" ");
 
-            //Now create a MinHasher object to minhash each of the documents created above
-            //using 300 unique hashing functions.
-            //MinHasher minHasher = new MinHasher(500, 5);
             Console.WriteLine("\r\nGenerating MinHash signatures ... ");
             sw.Restart();
             Dictionary<int, int[]> docMinhashes = minHasher.createMinhashCollection(flatInputReader.vertexLabelList);
             sw.Stop();
             Console.WriteLine("Generated MinHash signatures in Time : " + sw.Elapsed.ToString("mm\\:ss\\.ff"));
-            //Create the test doc minhash signature
-            int[] testDocMinhashSignature = minHasher.getMinHashSignature(testDoc);
-            double minhashCount = testDocMinhashSignature.Length;
-
-            //Compare the test document minhash signature to all minhash signatures  
-            //in our document collection using Jaccard similarity 
-            Console.WriteLine("\r\nJaccard Similarity for each Minhashed collection:");
-            sw.Restart();
-            int maxSimDocKey_fromJustMinHash = -1;
-            double maxSim_fromJustMinHash = -1;
-            index = 1;
-            foreach (var document in docMinhashes)
-            {
-                double jaccard = MinHasher.calculateJaccard(testDocMinhashSignature, document.Value);
-                //Console.WriteLine("Document " + document.Key.ToString() + ": " + jaccard.ToString() + "     Time :" + sw.Elapsed.ToString("mm\\:ss\\.ff"));
-                minhashCount += document.Value.Length;
-                if (jaccard > maxSim_fromJustMinHash && document.Key != testDocKey)
-                {
-                    maxSim_fromJustMinHash = jaccard;
-                    maxSimDocKey_fromJustMinHash = document.Key;
-                }
-                index++;
-            }
-            sw.Stop();
-            Console.WriteLine("\r\nMinHash jaccard Time :" + sw.Elapsed.ToString("mm\\:ss\\.ff"));
-
+            
             sw.Restart();
             Console.WriteLine("\r\nCreating MinHash buckets ... ");
             Dictionary<string, HashSet<int>> m_lshBuckets = minHasher.createBandBuckets(flatInputReader.vertexLabelList, docMinhashes);
             Console.WriteLine("Created MinHash buckets in Time : " + sw.Elapsed.ToString("mm\\:ss\\.ff"));
             sw.Stop();
-
-            sw.Restart();
-            Console.WriteLine("\r\nFinding closest using MinHash buckets ... ");
-            int maxSimDocKey_fromMinhashBuckets = minHasher.FindClosest(testDocKey, flatInputReader.vertexLabelList, docMinhashes, m_lshBuckets);
-            Console.WriteLine("Found closest using MinHash buckets in Time : " + sw.Elapsed.ToString("mm\\:ss\\.ff"));
-            sw.Stop();
-
+            
             Console.WriteLine("\r\nComplexity with regular jaccard lookup(estimate): " + Math.Pow(flatInputReader.vertexLabelList.Count, 3) / 5);
 
             sw.Restart();
@@ -959,13 +922,6 @@ namespace LinstaMatch
 
             Console.WriteLine("\r\nBucket pairsDictionary size: " + pairsDictionary.Count);
 
-            Console.WriteLine("\r\nTest doc key: " + testDocKey);
-            Console.WriteLine("\r\nMaxSimDocKey from Jaccard: " + maxSimDocKey_fromJaccard + "\t" + maxSim_fromJaccard);
-            Console.WriteLine("MaxSimDocKey from just Minhash: " + maxSimDocKey_fromJustMinHash + "\t" + maxSim_fromJustMinHash);
-            Console.WriteLine("MaxSimDocKey from Minhash buckets: " + maxSimDocKey_fromMinhashBuckets + "\t" + maxSim_fromJustMinHash);
-
-            Console.WriteLine("\r\nEntire Integer Count: " + entireCount);
-            Console.WriteLine("\r\nMinhash Integer Count: " + minhashCount);
             Console.ReadKey();
         }
     }

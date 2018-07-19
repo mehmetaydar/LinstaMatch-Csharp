@@ -17,6 +17,8 @@ namespace LinstaMatch
         public int ROWSINBAND = 5;
         private int m_numBands;
         private int bucketPairwiseLimit = 100;
+        //private int bucketPairwiseLimit = 500;
+        //private int bucketPairwiseLimit = 1000;
         private double atn = 0.05; //maximum accepted false negative rate
 
         public MinHasher2(int SignatureSize, double sim_threshold_)
@@ -250,7 +252,7 @@ namespace LinstaMatch
                 bucketIndex++;
                 if(bucket.Value.Count <=1)
                     continue;
-                if (bucket.Value.Count > bucketPairwiseLimit)
+                if (Program.Tuned && bucket.Value.Count > bucketPairwiseLimit)
                 {
                     Console.WriteLine("Broke on greater bucket pairwise limit: " + bucket.Value.Count);
                     break;
@@ -309,18 +311,22 @@ namespace LinstaMatch
             if (instance_match)
             {
                 Dictionary<string, int> alreadyMatched = new Dictionary<string, int>();
-                Console.WriteLine("Sorting pairsDictionary by their similarity descending ...");
                 List<KeyValuePair<string, Tuple<T1, T1, double>>> pairList = pairsDictionary.ToList();
-                pairList.Sort(
-                    delegate(KeyValuePair<string, Tuple<T1, T1, double>> pair1,
-                    KeyValuePair<string, Tuple<T1, T1, double>> pair2)
-                    {
-                        return pair2.Value.Item3.CompareTo(pair1.Value.Item3); //sorts by their similarity(jaccard) descending
-                    }
-                );
-                Console.WriteLine("Sorted pairsDictionary by their similarity descending.");
 
-                Console.WriteLine("Cleaned pairsDictionary...");
+                if (Program.Tuned)
+                {
+                    Console.WriteLine("Sorting pairsDictionary by their similarity descending ...");
+                    pairList.Sort(
+                        delegate(KeyValuePair<string, Tuple<T1, T1, double>> pair1,
+                            KeyValuePair<string, Tuple<T1, T1, double>> pair2)
+                        {
+                            return pair2.Value.Item3.CompareTo(pair1.Value.Item3);
+                                //sorts by their similarity(jaccard) descending
+                        }
+                        );
+                    Console.WriteLine("Sorted pairsDictionary by their similarity descending.");
+                    //Console.WriteLine("Cleaned pairsDictionary...");
+                }
                 foreach (var pair in pairList)
                 {
                     key1 = pair.Value.Item1.ToString();
@@ -335,7 +341,7 @@ namespace LinstaMatch
                     else//matched before with a higher similarity to another one so remove this
                         pairsDictionary.Remove(pair.Key);
                 }
-                Console.WriteLine("Cleaned pairsDictionary.");
+                //Console.WriteLine("Cleaned pairsDictionary.");
             }
 
             Console.WriteLine("\r\nBucket generating candidate pairs complexity: " +  loopCount);
@@ -359,18 +365,21 @@ namespace LinstaMatch
 
         public List<KeyValuePair<string, HashSet<T1>>> listBucketSizes<T1>(Dictionary<string, HashSet<T1>> m_lshBuckets, string output_file_name, bool writeToFile = false)
         {
-            Console.WriteLine("Sorting buckets by size ascending ...");
             List<KeyValuePair<string, HashSet<T1>>> myList = m_lshBuckets.ToList();
-            myList.Sort(
-                delegate(KeyValuePair<string, HashSet<T1>> pair1,
-                KeyValuePair<string, HashSet<T1>> pair2)
-                {
-                    return pair1.Value.Count.CompareTo(pair2.Value.Count); //sorts by bucket size ascending
-                }
-            );
-            Console.WriteLine("Sorted buckets by size ascending");            
-            //Dictionary<string, HashSet<int>> m_lshBuckets = new Dictionary<string, HashSet<int>>();
 
+            if (Program.Tuned)
+            {
+                Console.WriteLine("Sorting buckets by size ascending ...");
+                myList.Sort(
+                    delegate(KeyValuePair<string, HashSet<T1>> pair1,
+                        KeyValuePair<string, HashSet<T1>> pair2)
+                    {
+                        return pair1.Value.Count.CompareTo(pair2.Value.Count); //sorts by bucket size ascending
+                    }
+                    );
+                Console.WriteLine("Sorted buckets by size ascending");
+                //Dictionary<string, HashSet<int>> m_lshBuckets = new Dictionary<string, HashSet<int>>();
+            }
             if (writeToFile)
             {
                 Console.WriteLine("Writing bucket size to file ...");
@@ -446,6 +455,11 @@ namespace LinstaMatch
          */ 
         public int rbHashSelector2(double sim_threshold, int _numHashFunctions, double fail_rate)
         {
+            if (!Program.Tuned)
+            {
+                Console.WriteLine("Using constant r value: " + Program.ConstantRvalue);
+                return Program.ConstantRvalue;
+            }
             int numHashFunctions = _numHashFunctions;
             //int numHashFunc = 500;
             int n = numHashFunctions;
